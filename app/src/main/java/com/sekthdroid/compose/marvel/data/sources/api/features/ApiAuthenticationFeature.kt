@@ -13,6 +13,10 @@ class ApiAuthenticationFeature {
     class Config
 
     companion object : HttpClientFeature<Config, ApiAuthenticationFeature> {
+        const val ApiKey = "apikey"
+        const val TimeStamp = "ts"
+        const val Hash = "hash"
+
         override val key: AttributeKey<ApiAuthenticationFeature> =
             AttributeKey("AuthenticationMiddleware")
 
@@ -20,10 +24,10 @@ class ApiAuthenticationFeature {
             scope.requestPipeline.intercept(HttpRequestPipeline.Before) {
                 with(context) {
                     val ts = System.currentTimeMillis()
-                    parameter("apikey", BuildConfig.PublicKey)
-                    parameter("ts", ts)
+                    parameter(ApiKey, BuildConfig.PublicKey)
+                    parameter(TimeStamp, ts)
                     parameter(
-                        "hash",
+                        Hash,
                         "${ts}${BuildConfig.PrivateKey}${BuildConfig.PublicKey}".md5()
                     )
                 }
