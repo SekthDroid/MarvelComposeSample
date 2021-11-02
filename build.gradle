@@ -6,7 +6,7 @@ task clean(type: Delete) {
 
 buildscript {
     ext {
-        compose_version = '1.0.1'
+        compose_version = '1.0.4'
         kotlin_version = '1.5.31'
     }
 }
