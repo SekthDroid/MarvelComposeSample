@@ -5,7 +5,6 @@ import com.sekthdroid.compose.marvel.domain.ComicList
 import com.sekthdroid.compose.marvel.domain.MarvelCharacter
 import com.sekthdroid.compose.marvel.domain.SeriesList
 import com.sekthdroid.compose.marvel.domain.StoriesList
-import com.sekthdroid.compose.marvel.domain.Thumbnail
 
 object FakeCharacters {
     val characters = listOf("Spiderman", "Iron Man", "Thanos")
@@ -14,7 +13,7 @@ object FakeCharacters {
                 index.toLong(),
                 characterName,
                 "Amazing Spiderman",
-                Thumbnail("", ""),
+                "",
                 ComicList(0),
                 SeriesList(0),
                 StoriesList(0)

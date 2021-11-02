@@ -1,6 +1,5 @@
 package com.sekthdroid.compose.marvel.data.sources.room
 
-import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,12 +13,6 @@ data class CompleteCharacter(
         parentColumn = "id",
         entityColumn = "characterId"
     )
-    val thumbnail: ThumbnailEntity? = null,
-
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "characterId"
-    )
     val resources: List<ResourceEntity> = emptyList()
 )
 
@@ -27,21 +20,9 @@ data class CompleteCharacter(
 data class CharacterEntity(
     @PrimaryKey
     val id: Long,
-
-    @ColumnInfo(name = "name")
     val name: String?,
-
-    @ColumnInfo(name = "description")
+    val thumbnail: String?,
     val description: String?
-)
-
-@Entity(tableName = "thumbnails")
-class ThumbnailEntity(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
-    val url: String?,
-    val extension: String?,
-    val characterId: Long
 )
 
 enum class ResourceType {

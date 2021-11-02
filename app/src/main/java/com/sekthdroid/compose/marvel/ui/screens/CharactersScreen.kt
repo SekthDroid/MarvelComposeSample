@@ -184,7 +184,7 @@ fun CharactersList(
         items(characters) {
             CharacterListItem(
                 name = it.name,
-                image = it.thumbnail.sourceUrl(),
+                image = it.thumbnail,
                 onClick = { onCharacterClicked(it) },
                 modifier = Modifier.height(250.dp)
             )
@@ -206,7 +206,7 @@ fun CharactersGrid(
         items(characters) {
             CharacterListItem(
                 name = it.name,
-                image = it.thumbnail.sourceUrl(),
+                image = it.thumbnail,
                 onClick = { onCharacterClicked(it) },
                 modifier = Modifier
                     .height(250.dp)
@@ -221,7 +221,7 @@ fun CharactersGrid(
 fun CharacterListItem(
     modifier: Modifier = Modifier,
     name: String = "Spiderman",
-    image: String = "",
+    image: String? = null,
     onClick: () -> Unit = {}
 ) {
     Column(

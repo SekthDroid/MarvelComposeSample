@@ -105,7 +105,7 @@ fun CharacterDetail(
         ) {
             CharacterHeader(
                 characterName = character.name,
-                characterImage = character.thumbnail.sourceUrl(),
+                characterImage = character.thumbnail,
                 shape = RectangleShape,
                 height = 300.dp,
                 brush = Brush.verticalGradient(

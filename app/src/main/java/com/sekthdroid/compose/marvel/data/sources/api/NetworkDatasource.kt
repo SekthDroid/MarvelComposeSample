@@ -1,7 +1,7 @@
 package com.sekthdroid.compose.marvel.data.sources.api
 
 import com.sekthdroid.compose.marvel.domain.MarvelCharacter
-import com.sekthdroid.compose.marvel.domain.MarvelResponse
+import com.sekthdroid.compose.marvel.domain.Page
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import javax.inject.Inject
@@ -14,8 +14,8 @@ class NetworkDatasource @Inject constructor(
     private val httpClient: HttpClient,
     private val endpoints: ApiEndpoints
 ) {
-    suspend fun getCharacters(): List<MarvelCharacter> {
-        val response = httpClient.get<MarvelResponse>(endpoints.characters())
-        return response.data.results
+    suspend fun getCharacters(): Page<MarvelCharacter> {
+        val response = httpClient.get<MarvelResponse<CharacterApiModel>>(endpoints.characters())
+        return response.data.toPage { it.toCharacter() }
     }
 }

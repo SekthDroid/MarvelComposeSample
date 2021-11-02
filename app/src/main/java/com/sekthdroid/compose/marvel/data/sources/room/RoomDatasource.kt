@@ -10,7 +10,6 @@ class RoomDatasource @Inject constructor(private val charactersDao: CharactersDa
         character.forEach {
             charactersDao.insertAll(it.toEntity())
             charactersDao.insertAll(*it.toResourcesEntity().toTypedArray())
-            charactersDao.insertAll(it.thumbnail.toEntity(it.id))
         }
     }
 

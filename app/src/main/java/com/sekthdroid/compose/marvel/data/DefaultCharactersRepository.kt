@@ -22,8 +22,10 @@ class DefaultCharactersRepository @Inject constructor(
         flow {
             runCatching { networkDatasource.getCharacters() }
                 .onSuccess {
-                    roomDatasource.insert(*it.toTypedArray())
-                    emit(it)
+                    roomDatasource.insert(*it.results.toTypedArray())
+
+                    // TODO: 2/11/21 We will handle the pagination in the future
+                    emit(it.results)
                 }
         }
 

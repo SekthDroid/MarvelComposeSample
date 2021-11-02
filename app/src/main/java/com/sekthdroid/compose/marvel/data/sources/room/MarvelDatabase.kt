@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [CharacterEntity::class, ThumbnailEntity::class, ResourceEntity::class],
+    entities = [CharacterEntity::class, ResourceEntity::class],
     version = 1
 )
 abstract class MarvelDatabase : RoomDatabase() {

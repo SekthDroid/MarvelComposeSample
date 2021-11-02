@@ -20,8 +20,5 @@ interface CharactersDao {
     suspend fun insertAll(vararg character: CharacterEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg thumbnail: ThumbnailEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg resources: ResourceEntity)
 }

@@ -7,21 +7,15 @@ import com.sekthdroid.compose.marvel.domain.SeriesList
 import com.sekthdroid.compose.marvel.domain.SeriesSummary
 import com.sekthdroid.compose.marvel.domain.StoriesList
 import com.sekthdroid.compose.marvel.domain.StorySummary
-import com.sekthdroid.compose.marvel.domain.Thumbnail
 
 fun MarvelCharacter.toEntity(): CharacterEntity {
     return CharacterEntity(
         id = id,
         name = name,
+        thumbnail = thumbnail,
         description = description
     )
 }
-
-fun Thumbnail.toEntity(parentId: Long) = ThumbnailEntity(
-    url = path,
-    extension = extension,
-    characterId = parentId
-)
 
 fun MarvelCharacter.toResourcesEntity(): List<ResourceEntity> {
     return listOf(
@@ -57,10 +51,7 @@ fun CompleteCharacter.toMarvelCharacter(): MarvelCharacter {
         id = character.id,
         name = character.name.orEmpty(),
         description = character.description.orEmpty(),
-        thumbnail = Thumbnail(
-            path = thumbnail?.url.orEmpty(),
-            extension = thumbnail?.extension.orEmpty()
-        ),
+        thumbnail = character.thumbnail,
         comics = resources.toComicList(),
         series = resources.toSeriesList(),
         stories = resources.toStoriesList()
