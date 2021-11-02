@@ -1,12 +1,13 @@
 package com.sekthdroid.compose.marvel.data.sources.api.features
 
 import com.sekthdroid.compose.marvel.BuildConfig
-import com.sekthdroid.compose.marvel.md5
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature
 import io.ktor.client.request.HttpRequestPipeline
 import io.ktor.client.request.parameter
 import io.ktor.util.AttributeKey
+import java.math.BigInteger
+import java.security.MessageDigest
 
 class ApiAuthenticationFeature {
     class Config
@@ -33,6 +34,13 @@ class ApiAuthenticationFeature {
 
         override fun prepare(block: Config.() -> Unit): ApiAuthenticationFeature {
             return ApiAuthenticationFeature()
+        }
+
+        private fun String.md5(): String {
+            val md = MessageDigest.getInstance("MD5")
+            return BigInteger(1, md.digest(toByteArray()))
+                .toString(16)
+                .padStart(32, '0')
         }
     }
 }
