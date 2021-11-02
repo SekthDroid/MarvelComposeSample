@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
+import javax.inject.Inject
 
-class DefaultCharactersRepository(
+class DefaultCharactersRepository @Inject constructor(
     private val roomDatasource: RoomDatasource,
     private val networkDatasource: NetworkDatasource
 ) : CharactersRepository {

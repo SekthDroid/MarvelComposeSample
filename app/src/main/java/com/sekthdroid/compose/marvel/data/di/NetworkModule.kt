@@ -2,7 +2,6 @@ package com.sekthdroid.compose.marvel.data.di
 
 import com.sekthdroid.compose.marvel.BuildConfig
 import com.sekthdroid.compose.marvel.data.sources.api.ApiEndpoints
-import com.sekthdroid.compose.marvel.data.sources.api.NetworkDatasource
 import com.sekthdroid.compose.marvel.data.sources.api.features.AndroidLogger
 import com.sekthdroid.compose.marvel.data.sources.api.features.ApiAuthenticationFeature
 import dagger.Module
@@ -21,6 +20,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
     @Singleton
     @Provides
     fun jsonConfig(): Json {
@@ -49,11 +49,5 @@ class NetworkModule {
     @Provides
     fun apiEndpoints(): ApiEndpoints {
         return ApiEndpoints(BuildConfig.BaseUrl)
-    }
-
-    @Singleton
-    @Provides
-    fun networkDatasource(httpClient: HttpClient, apiEndpoints: ApiEndpoints): NetworkDatasource {
-        return NetworkDatasource(httpClient, apiEndpoints)
     }
 }

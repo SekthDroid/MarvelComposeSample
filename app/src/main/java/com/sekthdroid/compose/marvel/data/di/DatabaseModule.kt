@@ -14,6 +14,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
+
     @Singleton
     @Provides
     fun charactersDao(marvelDatabase: MarvelDatabase): CharactersDao {
