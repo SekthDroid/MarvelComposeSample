@@ -21,10 +21,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -57,25 +61,62 @@ import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+data class CharactersState(
+    val isLoading: Boolean = false,
+    val hasError: Boolean = false,
+    val data: List<MarvelCharacter> = emptyList()
+) {
+    fun toError(): CharactersState {
+        return copy(
+            hasError = true,
+            isLoading = false
+        )
+    }
+
+    fun toLoading(): CharactersState {
+        return copy(isLoading = true, hasError = false)
+    }
+
+    fun toData(data: List<MarvelCharacter>): CharactersState {
+        return copy(
+            isLoading = false,
+            hasError = false,
+            data = data
+        )
+    }
+}
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
     private val marvelRepository: CharactersRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(emptyList<MarvelCharacter>())
+    private val _state = MutableStateFlow(CharactersState().toLoading())
 
-    val state: StateFlow<List<MarvelCharacter>>
+    val state: StateFlow<CharactersState>
         get() = _state
 
     init {
+        loadCharacters()
+    }
+
+    fun load() {
+        loadCharacters()
+    }
+
+    private fun loadCharacters() {
         viewModelScope.launch {
             marvelRepository.getCharacters()
+                .onStart { _state.value = _state.value.toLoading() }
+                .catch { _state.value = _state.value.toError() }
                 .collect {
-                    _state.value = it
+                    _state.value = _state.value.toData(it)
                 }
         }
     }
@@ -97,7 +138,7 @@ fun CharactersScreen(
     viewModel: CharactersViewModel = viewModel(),
     onCharacterClicked: (MarvelCharacter) -> Unit = {}
 ) {
-    val characters by viewModel.state.collectAsState()
+    val charactersState by viewModel.state.collectAsState()
 
     // Here we use rememberSaveable so the view rememebr this state after coming back from detail
     val (contentType, setContentType) = rememberSaveable { mutableStateOf(ContentType.List) }
@@ -108,19 +149,61 @@ fun CharactersScreen(
         }
     ) {
         Column(
-            Modifier.systemBarsPadding(true)
+            modifier = Modifier
+                .systemBarsPadding(true)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Crossfade(targetState = contentType, animationSpec = tween(300)) {
+            Crossfade(
+                targetState = contentType,
+                animationSpec = tween(300),
+                modifier = Modifier.weight(1f)
+            ) {
                 when (it) {
                     ContentType.List -> {
-                        CharactersList(characters = characters, onCharacterClicked)
+                        CharactersList(characters = charactersState.data, onCharacterClicked)
                     }
                     ContentType.Grid -> {
-                        CharactersGrid(characters = characters, onCharacterClicked)
+                        CharactersGrid(characters = charactersState.data, onCharacterClicked)
                     }
                 }
             }
+
+            if (charactersState.isLoading) {
+                CircularProgressIndicator(
+                    color = MarvelRed
+                )
+            }
+
+            if (charactersState.hasError) {
+                RetrySnackbar(
+                    text = "It's seems that Thanos has snapped and something was wrong",
+                    retryText = "Snap!",
+                    onClick = { viewModel.load() }
+                )
+            }
         }
+    }
+}
+
+@Preview
+@Composable
+fun RetrySnackbar(
+    text: String = "This is a snackbar message",
+    retryText: String = "Retry",
+    onClick: () -> Unit = {}
+) {
+    Snackbar(
+        backgroundColor = Color.Red,
+        action = {
+            Button(
+                colors = ButtonDefaults.buttonColors(Color.Black),
+                onClick = { onClick() }) {
+                Text(text = retryText, color = Color.White)
+            }
+        }
+    ) {
+        Text(text = text, color = Color.White)
     }
 }
 

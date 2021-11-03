@@ -11,8 +11,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.sekthdroid.compose.marvel.ui.navigation.AppNavigation
 import com.sekthdroid.compose.marvel.ui.theme.MarvelComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
-import java.math.BigInteger
-import java.security.MessageDigest
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
