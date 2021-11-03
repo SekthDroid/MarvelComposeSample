@@ -41,7 +41,6 @@ The project contains following features:
 * Characters Comics list + Detail
 * Github Actions to apply ktlint and others static analysis tools
 * UI Testing
-* Create `Network` models so we dont use domain ones
 * Error handling (error views, modals, retry mechanism)
 
 ## Setup
