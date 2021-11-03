@@ -6,9 +6,9 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.sekthdroid.compose.marvel.ui.screens.CharacterScreen
-import com.sekthdroid.compose.marvel.ui.screens.CharactersScreen
 import com.sekthdroid.compose.marvel.ui.screens.Screen
+import com.sekthdroid.compose.marvel.ui.screens.character.CharacterScreen
+import com.sekthdroid.compose.marvel.ui.screens.characters.CharactersScreen
 import com.sekthdroid.compose.marvel.ui.screens.composable
 
 @Composable

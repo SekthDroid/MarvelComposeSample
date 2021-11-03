@@ -1,4 +1,4 @@
-package com.sekthdroid.compose.marvel.ui.screens
+package com.sekthdroid.compose.marvel.ui.screens.characters
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -46,90 +46,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.systemBarsPadding
 import com.sekthdroid.compose.marvel.R
-import com.sekthdroid.compose.marvel.data.CharactersRepository
 import com.sekthdroid.compose.marvel.domain.MarvelCharacter
 import com.sekthdroid.compose.marvel.ui.composables.ImagePlaceholder
 import com.sekthdroid.compose.marvel.ui.providers.FakeCharactersProvider
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-
-data class CharactersState(
-    val isLoading: Boolean = false,
-    val hasError: Boolean = false,
-    val data: List<MarvelCharacter> = emptyList()
-) {
-    fun toError(): CharactersState {
-        return copy(
-            hasError = true,
-            isLoading = false
-        )
-    }
-
-    fun toLoading(): CharactersState {
-        return copy(isLoading = true, hasError = false)
-    }
-
-    fun toData(data: List<MarvelCharacter>): CharactersState {
-        return copy(
-            isLoading = false,
-            hasError = false,
-            data = data
-        )
-    }
-}
-
-@HiltViewModel
-class CharactersViewModel @Inject constructor(
-    private val marvelRepository: CharactersRepository
-) : ViewModel() {
-
-    private val _state = MutableStateFlow(CharactersState().toLoading())
-
-    val state: StateFlow<CharactersState>
-        get() = _state
-
-    init {
-        loadCharacters()
-    }
-
-    fun load() {
-        loadCharacters()
-    }
-
-    private fun loadCharacters() {
-        viewModelScope.launch {
-            marvelRepository.getCharacters()
-                .onStart { _state.value = _state.value.toLoading() }
-                .catch { _state.value = _state.value.toError() }
-                .collect {
-                    _state.value = _state.value.toData(it)
-                }
-        }
-    }
-}
-
-enum class ContentType {
-    List,
-    Grid;
-
-    fun inverse(): ContentType {
-        return if (this == List) Grid else List
-    }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
@@ -140,7 +65,7 @@ fun CharactersScreen(
 ) {
     val charactersState by viewModel.state.collectAsState()
 
-    // Here we use rememberSaveable so the view rememebr this state after coming back from detail
+    // Here we use rememberSaveable so the view remember this state after coming back from detail
     val (contentType, setContentType) = rememberSaveable { mutableStateOf(ContentType.List) }
 
     Scaffold(
@@ -183,6 +108,15 @@ fun CharactersScreen(
                 )
             }
         }
+    }
+}
+
+enum class ContentType {
+    List,
+    Grid;
+
+    fun inverse(): ContentType {
+        return if (this == List) Grid else List
     }
 }
 
