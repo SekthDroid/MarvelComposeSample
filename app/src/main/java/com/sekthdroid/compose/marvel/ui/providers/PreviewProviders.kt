@@ -21,7 +21,7 @@ object FakeCharacters {
         }
 }
 
-class CharacterProvider : PreviewParameterProvider<MarvelCharacter> {
+class SingleCharacterProvider : PreviewParameterProvider<MarvelCharacter> {
     override val values: Sequence<MarvelCharacter>
         get() = sequenceOf(FakeCharacters.characters.first())
 }
