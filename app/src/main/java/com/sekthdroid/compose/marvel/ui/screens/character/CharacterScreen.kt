@@ -118,7 +118,11 @@ fun CharacterDetail(
             // Render comics section
             item {
                 TitleDropdown(
-                    title = stringResource(id = R.string.comics),
+                    title = quantifiedTitle(
+                        resourceWithQuantity = R.string.comics_quantity,
+                        resourceWithoutQuantity = R.string.comics,
+                        quantity = character.comics.available
+                    ),
                     expanded = comicSectionExpanded,
                     onTitleClick = {
                         comicSectionExpanded = it
@@ -135,7 +139,11 @@ fun CharacterDetail(
             // Render stories section
             item {
                 TitleDropdown(
-                    title = stringResource(id = R.string.stories),
+                    title = quantifiedTitle(
+                        resourceWithQuantity = R.string.stories_quantity,
+                        resourceWithoutQuantity = R.string.stories,
+                        quantity = character.stories.available
+                    ),
                     expanded = storiesSectionExpanded,
                     onTitleClick = {
                         storiesSectionExpanded = it
@@ -152,7 +160,11 @@ fun CharacterDetail(
             // Render series section
             item {
                 TitleDropdown(
-                    title = stringResource(id = R.string.series),
+                    title = quantifiedTitle(
+                        resourceWithQuantity = R.string.series_quantity,
+                        resourceWithoutQuantity = R.string.series,
+                        character.series.available
+                    ),
                     expanded = seriesSectionExpanded,
                     onTitleClick = {
                         seriesSectionExpanded = it
@@ -166,6 +178,20 @@ fun CharacterDetail(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun quantifiedTitle(
+    resourceWithQuantity: Int,
+    resourceWithoutQuantity: Int,
+    quantity: Int = 0,
+    withQuantity: Boolean = true
+): String {
+    return if (withQuantity) {
+        stringResource(id = resourceWithQuantity, quantity)
+    } else {
+        stringResource(id = resourceWithoutQuantity)
     }
 }
 

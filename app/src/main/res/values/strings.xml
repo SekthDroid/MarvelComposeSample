@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">MarvelCompose</string>
     <string name="comics">Comics</string>
+    <string name="comics_quantity">Comics (%d)</string>
     <string name="series">Series</string>
+    <string name="series_quantity">Series (%d)</string>
     <string name="stories">Stories</string>
+    <string name="stories_quantity">Stories (%d)</string>
 </resources>
