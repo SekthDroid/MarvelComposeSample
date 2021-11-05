@@ -2,20 +2,17 @@ package com.sekthdroid.compose.marvel.ui.screens.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sekthdroid.compose.marvel.data.CharactersRepository
+import com.sekthdroid.marvel.domain.characters.CharactersRepository
 import com.sekthdroid.compose.marvel.domain.MarvelCharacter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val marvelRepository: CharactersRepository
+    private val marvelRepository: com.sekthdroid.marvel.domain.characters.CharactersRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CharactersState().toLoading())

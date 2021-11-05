@@ -1,7 +1,7 @@
 package com.sekthdroid.compose.marvel.data.sources.api
 
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
-import com.sekthdroid.compose.marvel.domain.Page
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
+import com.sekthdroid.marvel.domain.models.Page
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import javax.inject.Inject

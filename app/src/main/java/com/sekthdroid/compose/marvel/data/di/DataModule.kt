@@ -1,6 +1,6 @@
 package com.sekthdroid.compose.marvel.data.di
 
-import com.sekthdroid.compose.marvel.data.CharactersRepository
+import com.sekthdroid.marvel.domain.characters.CharactersRepository
 import com.sekthdroid.compose.marvel.data.DefaultCharactersRepository
 import dagger.Binds
 import dagger.Module
@@ -14,5 +14,5 @@ abstract class DataModule {
 
     @Singleton
     @Binds
-    abstract fun bindCharactersRepository(characterRepository: DefaultCharactersRepository): CharactersRepository
+    abstract fun bindCharactersRepository(characterRepository: DefaultCharactersRepository): com.sekthdroid.marvel.domain.characters.CharactersRepository
 }

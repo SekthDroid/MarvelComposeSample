@@ -1,6 +1,6 @@
-package com.sekthdroid.compose.marvel.data
+package com.sekthdroid.marvel.domain.characters
 
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 

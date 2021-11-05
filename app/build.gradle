@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
 
     // Android
     implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
