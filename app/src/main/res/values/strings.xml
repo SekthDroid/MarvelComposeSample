@@ -6,4 +6,6 @@
     <string name="series_quantity">Series (%d)</string>
     <string name="stories">Stories</string>
     <string name="stories_quantity">Stories (%d)</string>
+    <string name="description">Description</string>
+    <string name="description_empty_content">No description available</string>
 </resources>

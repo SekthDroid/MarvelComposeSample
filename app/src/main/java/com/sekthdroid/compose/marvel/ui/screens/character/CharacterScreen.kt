@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -112,6 +114,10 @@ fun CharacterDetail(
                 Divider(color = MarvelRed)
             }
 
+            item {
+                DescriptionBlock(character.description)
+            }
+
             // FIXME: 4/11/21 Maybe we could create some kind of method to create
             //  a section and remove duplicated blocks
 
@@ -192,6 +198,28 @@ fun quantifiedTitle(
         stringResource(id = resourceWithQuantity, quantity)
     } else {
         stringResource(id = resourceWithoutQuantity)
+    }
+}
+
+@Preview
+@Composable
+fun DescriptionBlock(description: String = "Hello this is a description") {
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text(
+            text = stringResource(R.string.description),
+            fontStyle = FontStyle.Normal,
+            style = MaterialTheme.typography.h5,
+            color = Color.White,
+            fontFamily = MarvelFontFamily,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = description.ifEmpty { stringResource(R.string.description_empty_content) },
+            style = MaterialTheme.typography.body1,
+            color = Color.LightGray
+        )
     }
 }
 
