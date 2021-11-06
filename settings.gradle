@@ -10,6 +10,7 @@ pluginManagement {
         id 'org.jetbrains.kotlin.android' version '1.5.31'
         id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.31'
         id 'hilt-android-gradle-plugin' version '2.38.1'
+        id 'org.jetbrains.kotlin.jvm' version '1.5.30'
     }
     resolutionStrategy {
         eachPlugin {
@@ -32,3 +33,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MarvelCompose"
 include ':app'
+include ':domain'

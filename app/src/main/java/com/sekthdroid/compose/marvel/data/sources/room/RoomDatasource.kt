@@ -1,6 +1,6 @@
 package com.sekthdroid.compose.marvel.data.sources.room
 
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import javax.inject.Inject
 import javax.inject.Singleton
 

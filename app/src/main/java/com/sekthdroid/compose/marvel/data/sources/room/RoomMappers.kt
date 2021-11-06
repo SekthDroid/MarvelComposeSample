@@ -1,12 +1,12 @@
 package com.sekthdroid.compose.marvel.data.sources.room
 
-import com.sekthdroid.compose.marvel.domain.ComicList
-import com.sekthdroid.compose.marvel.domain.ComicSummary
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
-import com.sekthdroid.compose.marvel.domain.SeriesList
-import com.sekthdroid.compose.marvel.domain.SeriesSummary
-import com.sekthdroid.compose.marvel.domain.StoriesList
-import com.sekthdroid.compose.marvel.domain.StorySummary
+import com.sekthdroid.marvel.domain.models.ComicList
+import com.sekthdroid.marvel.domain.models.ComicSummary
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
+import com.sekthdroid.marvel.domain.models.SeriesList
+import com.sekthdroid.marvel.domain.models.SeriesSummary
+import com.sekthdroid.marvel.domain.models.StoriesList
+import com.sekthdroid.marvel.domain.models.StorySummary
 
 fun MarvelCharacter.toEntity(): CharacterEntity {
     return CharacterEntity(

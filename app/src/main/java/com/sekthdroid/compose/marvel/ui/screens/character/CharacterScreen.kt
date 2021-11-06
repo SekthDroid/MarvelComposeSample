@@ -42,11 +42,11 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.sekthdroid.compose.marvel.R
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
 import com.sekthdroid.compose.marvel.ui.composables.CharacterHeader
 import com.sekthdroid.compose.marvel.ui.providers.SingleCharacterProvider
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
 
 @Composable
 fun CharacterScreen(

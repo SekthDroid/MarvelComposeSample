@@ -50,11 +50,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.systemBarsPadding
 import com.sekthdroid.compose.marvel.R
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
 import com.sekthdroid.compose.marvel.ui.composables.ImagePlaceholder
 import com.sekthdroid.compose.marvel.ui.providers.FakeCharactersProvider
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview

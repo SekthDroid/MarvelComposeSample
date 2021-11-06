@@ -2,8 +2,8 @@ package com.sekthdroid.compose.marvel.ui.screens.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sekthdroid.compose.marvel.data.CharactersRepository
-import com.sekthdroid.compose.marvel.domain.MarvelCharacter
+import com.sekthdroid.marvel.domain.characters.CharactersRepository
+import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
