@@ -1,6 +1,6 @@
-package com.sekthdroid.compose.marvel.data.sources.api.features
+package com.sekthdroid.marvel.data.api.features
 
-import com.sekthdroid.compose.marvel.BuildConfig
+import com.sekthdroid.marvel.data.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature
 import io.ktor.client.request.HttpRequestPipeline
@@ -9,13 +9,13 @@ import io.ktor.util.AttributeKey
 import java.math.BigInteger
 import java.security.MessageDigest
 
-class ApiAuthenticationFeature {
+internal class ApiAuthenticationFeature {
     class Config
 
     companion object : HttpClientFeature<Config, ApiAuthenticationFeature> {
-        const val ApiKey = "apikey"
-        const val TimeStamp = "ts"
-        const val Hash = "hash"
+        private const val ApiKey = "apikey"
+        private const val TimeStamp = "ts"
+        private const val Hash = "hash"
 
         override val key: AttributeKey<ApiAuthenticationFeature> =
             AttributeKey("AuthenticationMiddleware")

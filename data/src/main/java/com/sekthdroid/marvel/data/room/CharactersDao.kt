@@ -1,4 +1,4 @@
-package com.sekthdroid.compose.marvel.data.sources.room
+package com.sekthdroid.marvel.data.room
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 
 @Dao
-interface CharactersDao {
+internal interface CharactersDao {
     @Transaction
     @Query("SELECT * FROM characters ORDER BY name")
     suspend fun getAll(): List<CompleteCharacter>

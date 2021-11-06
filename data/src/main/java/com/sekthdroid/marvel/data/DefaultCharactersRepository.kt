@@ -1,7 +1,8 @@
-package com.sekthdroid.compose.marvel.data
+package com.sekthdroid.marvel.data
 
-import com.sekthdroid.compose.marvel.data.sources.api.NetworkDatasource
-import com.sekthdroid.compose.marvel.data.sources.room.RoomDatasource
+import com.sekthdroid.marvel.data.api.NetworkDatasource
+import com.sekthdroid.marvel.data.room.RoomDatasource
+import com.sekthdroid.marvel.domain.characters.CharactersRepository
 import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
@@ -9,10 +10,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 import javax.inject.Inject
 
-class DefaultCharactersRepository @Inject constructor(
+internal class DefaultCharactersRepository @Inject constructor(
     private val roomDatasource: RoomDatasource,
     private val networkDatasource: NetworkDatasource
-) : com.sekthdroid.marvel.domain.characters.CharactersRepository {
+) : CharactersRepository {
 
     override fun getCharacters(): Flow<List<MarvelCharacter>> {
         return flow { emit(roomDatasource.get()) }.onCompletion { emitAll(networkFlow()) }

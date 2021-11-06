@@ -1,9 +1,9 @@
-package com.sekthdroid.compose.marvel.data.di
+package com.sekthdroid.marvel.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.sekthdroid.compose.marvel.data.sources.room.CharactersDao
-import com.sekthdroid.compose.marvel.data.sources.room.MarvelDatabase
+import com.sekthdroid.marvel.data.room.CharactersDao
+import com.sekthdroid.marvel.data.room.MarvelDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+internal class DatabaseModule {
 
     @Singleton
     @Provides

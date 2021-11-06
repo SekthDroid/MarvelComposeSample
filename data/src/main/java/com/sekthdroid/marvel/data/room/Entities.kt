@@ -1,11 +1,11 @@
-package com.sekthdroid.compose.marvel.data.sources.room
+package com.sekthdroid.marvel.data.room
 
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 
-data class CompleteCharacter(
+internal data class CompleteCharacter(
     @Embedded
     val character: CharacterEntity,
 
@@ -17,7 +17,7 @@ data class CompleteCharacter(
 )
 
 @Entity(tableName = "characters")
-data class CharacterEntity(
+internal data class CharacterEntity(
     @PrimaryKey
     val id: Long,
     val name: String?,
@@ -25,12 +25,12 @@ data class CharacterEntity(
     val description: String?
 )
 
-enum class ResourceType {
+internal enum class ResourceType {
     Comic, Story, Serie
 }
 
 @Entity(tableName = "resources", primaryKeys = ["characterId", "resourceUri"])
-class ResourceEntity(
+internal class ResourceEntity(
     val characterId: Long,
     val resourceUri: String,
     val name: String?,

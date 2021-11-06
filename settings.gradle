@@ -34,3 +34,4 @@ dependencyResolutionManagement {
 rootProject.name = "MarvelCompose"
 include ':app'
 include ':domain'
+include ':data'
