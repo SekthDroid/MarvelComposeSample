@@ -1,9 +1,9 @@
-package com.sekthdroid.compose.marvel.data.di
+package com.sekthdroid.marvel.data.di
 
-import com.sekthdroid.compose.marvel.BuildConfig
-import com.sekthdroid.compose.marvel.data.sources.api.ApiEndpoints
-import com.sekthdroid.compose.marvel.data.sources.api.features.AndroidLogger
-import com.sekthdroid.compose.marvel.data.sources.api.features.ApiAuthenticationFeature
+import com.sekthdroid.marvel.data.BuildConfig
+import com.sekthdroid.marvel.data.api.ApiEndpoints
+import com.sekthdroid.marvel.data.api.features.AndroidLogger
+import com.sekthdroid.marvel.data.api.features.ApiAuthenticationFeature
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+internal class NetworkModule {
 
     @Singleton
     @Provides

@@ -1,4 +1,4 @@
-package com.sekthdroid.compose.marvel.data.sources.api
+package com.sekthdroid.marvel.data.api
 
 import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import com.sekthdroid.marvel.domain.models.Page
@@ -6,11 +6,11 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import javax.inject.Inject
 
-class ApiEndpoints(private val baseUrl: String) {
+internal class ApiEndpoints(private val baseUrl: String) {
     fun characters() = "$baseUrl/characters"
 }
 
-class NetworkDatasource @Inject constructor(
+internal class NetworkDatasource @Inject constructor(
     private val httpClient: HttpClient,
     private val endpoints: ApiEndpoints
 ) {

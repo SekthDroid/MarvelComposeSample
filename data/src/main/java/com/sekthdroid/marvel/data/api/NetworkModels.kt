@@ -1,4 +1,4 @@
-package com.sekthdroid.compose.marvel.data.sources.api
+package com.sekthdroid.marvel.data.api
 
 import kotlinx.serialization.Serializable
 

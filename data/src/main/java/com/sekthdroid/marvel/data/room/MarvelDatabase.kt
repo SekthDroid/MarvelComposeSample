@@ -1,4 +1,4 @@
-package com.sekthdroid.compose.marvel.data.sources.room
+package com.sekthdroid.marvel.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -7,6 +7,6 @@ import androidx.room.RoomDatabase
     entities = [CharacterEntity::class, ResourceEntity::class],
     version = 1
 )
-abstract class MarvelDatabase : RoomDatabase() {
+internal abstract class MarvelDatabase : RoomDatabase() {
     abstract fun charactersDao(): CharactersDao
 }
