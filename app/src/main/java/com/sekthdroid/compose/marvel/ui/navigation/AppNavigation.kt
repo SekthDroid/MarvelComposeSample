@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import com.sekthdroid.compose.marvel.ui.screens.Screen
 import com.sekthdroid.compose.marvel.ui.screens.character.CharacterScreen
 import com.sekthdroid.compose.marvel.ui.screens.characters.CharactersScreen
+import com.sekthdroid.compose.marvel.ui.screens.comics.ComicScreen
 import com.sekthdroid.compose.marvel.ui.screens.composable
 
 @Composable
@@ -30,6 +31,13 @@ fun AppNavigation(navController: NavHostController) {
             CharacterScreen(
                 navigationController = navController,
                 characterId = it.arguments?.getString("characterId"),
+                viewModel = hiltViewModel()
+            )
+        }
+        composable(Screen.ComicDetail) {
+            ComicScreen(
+                navigationController = navController,
+                comicId = it.arguments?.getString("comicId"),
                 viewModel = hiltViewModel()
             )
         }

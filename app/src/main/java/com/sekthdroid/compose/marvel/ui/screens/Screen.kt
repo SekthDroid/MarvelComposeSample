@@ -12,6 +12,10 @@ sealed class Screen(val route: String) {
     object CharacterDetail : Screen("character/{characterId}") {
         fun createRoute(characterId: Long) = route.replace("{characterId}", characterId.toString())
     }
+
+    object ComicDetail : Screen("comic/{comidId}") {
+        fun createRoute(comicId: Long) = route.replace("{comicId}", comicId.toString())
+    }
 }
 
 fun NavGraphBuilder.composable(
