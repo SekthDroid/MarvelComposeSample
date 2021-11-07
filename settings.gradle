@@ -10,7 +10,7 @@ pluginManagement {
         id 'org.jetbrains.kotlin.android' version '1.5.31'
         id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.31'
         id 'hilt-android-gradle-plugin' version '2.38.1'
-        id 'org.jetbrains.kotlin.jvm' version '1.5.30'
+        id 'org.jetbrains.kotlin.jvm' version '1.5.31'
     }
     resolutionStrategy {
         eachPlugin {

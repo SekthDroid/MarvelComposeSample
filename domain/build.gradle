@@ -1,13 +1,37 @@
+// Fixme I had to make this as android library because IDE throws linter with the following error
+//  'Check your module classpath for missing or conflicting dependencies'
 plugins {
-    id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 31
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
+    // Kotlin
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 }

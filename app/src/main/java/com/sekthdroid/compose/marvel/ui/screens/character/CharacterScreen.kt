@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -46,9 +47,12 @@ import androidx.navigation.NavController
 import com.sekthdroid.compose.marvel.R
 import com.sekthdroid.compose.marvel.ui.composables.CharacterHeader
 import com.sekthdroid.compose.marvel.ui.providers.SingleCharacterProvider
+import com.sekthdroid.compose.marvel.ui.screens.Screen
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
+import com.sekthdroid.marvel.domain.models.CharacterCollection
 import com.sekthdroid.marvel.domain.models.MarvelCharacter
+import com.sekthdroid.marvel.domain.models.toCharacterCollection
 
 @Composable
 fun CharacterScreen(
@@ -68,7 +72,12 @@ fun CharacterScreen(
         character?.let {
             CharacterDetail(
                 character = it,
-                onBackPressed = { navigationController.popBackStack() }
+                onBackPressed = { navigationController.popBackStack() },
+                onResourceClicked = { collection ->
+                    navigationController.navigate(
+                        Screen.ComicDetail.createRoute(collection.id)
+                    )
+                }
             )
         }
     }
@@ -78,7 +87,8 @@ fun CharacterScreen(
 @Composable
 fun CharacterDetail(
     @PreviewParameter(SingleCharacterProvider::class) character: MarvelCharacter,
-    onBackPressed: () -> Unit = {}
+    onBackPressed: () -> Unit = {},
+    onResourceClicked: (CharacterCollection) -> Unit = {}
 ) {
     var comicSectionExpanded by remember { mutableStateOf(false) }
     var seriesSectionExpanded by remember { mutableStateOf(false) }
@@ -138,7 +148,9 @@ fun CharacterDetail(
 
             if (comicSectionExpanded) {
                 items(character.comics.items) {
-                    ResourceItem(it.name)
+                    ResourceItem(it.name) {
+                        onResourceClicked(it.toCharacterCollection())
+                    }
                 }
             }
 
@@ -262,9 +274,11 @@ fun TitleDropdown(
 
 @Preview(widthDp = 320)
 @Composable
-fun ResourceItem(value: String = "Sample") {
+fun ResourceItem(value: String = "Sample", onClick: () -> Unit = {}) {
     Box(
         modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
             .padding(horizontal = 16.dp)
             .height(36.dp),
         contentAlignment = Alignment.CenterStart
