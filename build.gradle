@@ -22,8 +22,8 @@ buildscript {
         coroutines_version = '1.5.2'
 
         // Data versions
-        ktor_version = '1.6.4'
-        room_version = '2.3.0'
+        ktor_version = '2.0.2'
+        room_version = '2.4.2'
         kotlinx_serialization_version = '1.3.0'
 
         // Hilt
