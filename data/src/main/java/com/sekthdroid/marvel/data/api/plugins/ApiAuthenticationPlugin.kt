@@ -8,7 +8,8 @@ import io.ktor.util.AttributeKey
 import java.math.BigInteger
 import java.security.MessageDigest
 
-internal class ApiAuthenticationPlugin(private val config: Config) {
+internal class ApiAuthenticationPlugin(val config: Config) {
+
     class Config {
         var privateKey: String = ""
         var publicKey: String = ""
@@ -26,6 +27,7 @@ internal class ApiAuthenticationPlugin(private val config: Config) {
             scope.requestPipeline.intercept(HttpRequestPipeline.Before) {
                 with(context) {
                     val ts = System.currentTimeMillis()
+                    println("making request with $ts")
                     parameter(ApiKey, plugin.config.publicKey)
                     parameter(TimeStamp, ts)
                     parameter(

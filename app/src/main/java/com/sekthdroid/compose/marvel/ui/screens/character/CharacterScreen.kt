@@ -53,14 +53,8 @@ import com.sekthdroid.marvel.domain.models.MarvelCharacter
 @Composable
 fun CharacterScreen(
     navigationController: NavController,
-    characterId: String?,
     viewModel: CharacterDetailViewModel = viewModel(),
 ) {
-
-    LaunchedEffect(characterId) {
-        // FIXME: 31/10/21 This should be triggered on ViewModel.init, lets handle it later
-        viewModel.fetch(characterId)
-    }
 
     val character by viewModel.state.collectAsState()
 

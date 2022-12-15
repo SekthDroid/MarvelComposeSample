@@ -16,9 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -48,7 +49,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.google.accompanist.insets.systemBarsPadding
 import com.sekthdroid.compose.marvel.R
 import com.sekthdroid.compose.marvel.ui.composables.ImagePlaceholder
 import com.sekthdroid.compose.marvel.ui.providers.FakeCharactersProvider
@@ -75,7 +75,7 @@ fun CharactersScreen(
     ) {
         Column(
             modifier = Modifier
-                .systemBarsPadding(true)
+                .padding(it)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -217,7 +217,7 @@ fun CharactersGrid(
     onCharacterClicked: (MarvelCharacter) -> Unit = {}
 ) {
     LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
+        columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         items(characters) {
