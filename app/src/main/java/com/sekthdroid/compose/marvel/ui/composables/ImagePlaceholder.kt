@@ -1,6 +1,5 @@
 package com.sekthdroid.compose.marvel.ui.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -14,7 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
 
@@ -45,8 +44,8 @@ fun ImagePlaceholder(modifier: Modifier = Modifier, imageUrl: String? = null) {
             )
         }
     } else {
-        Image(
-            painter = rememberImagePainter(data = imageUrl),
+        AsyncImage(
+            model = imageUrl,
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = modifier

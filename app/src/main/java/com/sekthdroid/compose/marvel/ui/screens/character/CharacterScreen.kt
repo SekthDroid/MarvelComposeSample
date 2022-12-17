@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -22,7 +25,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,7 +44,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.sekthdroid.compose.marvel.R
 import com.sekthdroid.compose.marvel.ui.composables.CharacterHeader
 import com.sekthdroid.compose.marvel.ui.providers.SingleCharacterProvider
@@ -52,17 +53,21 @@ import com.sekthdroid.marvel.domain.models.MarvelCharacter
 
 @Composable
 fun CharacterScreen(
-    navigationController: NavController,
     viewModel: CharacterDetailViewModel = viewModel(),
+    onBackPressed: () -> Unit
 ) {
 
     val character by viewModel.state.collectAsState()
 
-    Scaffold(backgroundColor = Color.Black) {
+    Scaffold(
+        backgroundColor = Color.Black,
+        modifier = Modifier.navigationBarsPadding()
+    ) { paddingValues ->
         character?.let {
             CharacterDetail(
                 character = it,
-                onBackPressed = { navigationController.popBackStack() }
+                onBackPressed = onBackPressed,
+                modifier = Modifier.padding(paddingValues)
             )
         }
     }
@@ -72,7 +77,8 @@ fun CharacterScreen(
 @Composable
 fun CharacterDetail(
     @PreviewParameter(SingleCharacterProvider::class) character: MarvelCharacter,
-    onBackPressed: () -> Unit = {}
+    modifier: Modifier = Modifier,
+    onBackPressed: () -> Unit = {},
 ) {
     var comicSectionExpanded by remember { mutableStateOf(false) }
     var seriesSectionExpanded by remember { mutableStateOf(false) }
@@ -81,15 +87,20 @@ fun CharacterDetail(
     Box {
         TopAppBar(
             backgroundColor = Color.Transparent,
-            elevation = 0.dp,
-            modifier = Modifier.zIndex(1f)
+            modifier = Modifier
+                .zIndex(1f)
+                .statusBarsPadding(),
+            elevation = 0.dp
         ) {
-            Image(
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "",
-                colorFilter = ColorFilter.tint(Color.White),
-                modifier = Modifier.clickable { onBackPressed() }
-            )
+            Row {
+                IconButton(onClick = onBackPressed) {
+                    Image(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "",
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                }
+            }
         }
         LazyColumn {
             item {

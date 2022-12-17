@@ -28,8 +28,10 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable(Screen.CharacterDetail) {
             CharacterScreen(
-                navigationController = navController,
-                viewModel = hiltViewModel()
+                viewModel = hiltViewModel(),
+                onBackPressed = {
+                    navController.popBackStack()
+                }
             )
         }
     }

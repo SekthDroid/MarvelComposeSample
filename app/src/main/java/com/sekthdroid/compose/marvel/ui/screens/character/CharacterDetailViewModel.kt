@@ -21,9 +21,8 @@ class CharacterDetailViewModel @Inject constructor(
     val state: StateFlow<MarvelCharacter?> = _state
 
     init {
-        println(savedStateHandle.keys())
         viewModelScope.launch {
-            repository.getCharacter(savedStateHandle.get("characterId"))
+            repository.getCharacter(savedStateHandle["characterId"])
                 .also {
                     _state.value = it
                 }

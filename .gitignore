@@ -16,6 +16,7 @@
 .idea/androidTestResultsUserPreferences.xml
 .idea/assetWizardSettings.xml
 .idea/kotlinc.xml
+.idea/codeStyles/Project.xml
 gradle.xml
 
 .DS_Store
