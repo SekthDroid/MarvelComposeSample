@@ -3,8 +3,10 @@ package com.sekthdroid.compose.marvel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -16,17 +18,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             MarvelComposeTheme(true) {
-                ProvideWindowInsets {
 
-                    val systemUiController = rememberSystemUiController()
-                    SideEffect {
-                        systemUiController.setSystemBarsColor(Color.Black)
-                    }
-
-                    AppNavigation(navController = rememberNavController())
+                val systemUiController = rememberSystemUiController()
+                DisposableEffect(systemUiController) {
+                    systemUiController.setStatusBarColor(
+                        Color.Transparent
+                    )
+                    onDispose {  }
                 }
+
+                AppNavigation(navController = rememberNavController())
             }
         }
     }

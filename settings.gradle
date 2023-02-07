@@ -5,25 +5,26 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id 'com.android.application' version '7.1.0-beta02'
-        id 'com.android.library' version '7.1.0-beta02'
-        id 'org.jetbrains.kotlin.android' version '1.5.31'
-        id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.31'
-        id 'hilt-android-gradle-plugin' version '2.38.1'
-        id 'org.jetbrains.kotlin.jvm' version '1.5.30'
+        id 'com.android.application' version '7.4.1'
+        id 'com.android.library' version '7.4.1'
+        id 'org.jetbrains.kotlin.android' version '1.7.20'
+        id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.20'
+        id "org.jetbrains.kotlin.kapt" version "1.7.20"
+        id 'com.google.dagger.hilt.android' version '2.44' apply false
+        id 'org.jetbrains.kotlin.jvm' version '1.7.20'
+        id 'de.fayard.refreshVersions' version '0.51.0'
     }
     resolutionStrategy {
         eachPlugin {
 
-            // As today (1 Nov 2021) I cannot find any solution to add Hilt to Jetpack compose
-            // as in the Developer Guides
-            // https://stackoverflow.com/a/69514340/1769831
-            if (requested.id.id == 'dagger.hilt.android.plugin') {
-                useModule("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
-            }
         }
     }
 }
+
+plugins {
+    id "de.fayard.refreshVersions"
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

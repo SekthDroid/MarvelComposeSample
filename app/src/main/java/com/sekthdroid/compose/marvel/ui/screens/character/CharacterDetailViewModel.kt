@@ -1,5 +1,6 @@
 package com.sekthdroid.compose.marvel.ui.screens.character
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sekthdroid.marvel.domain.characters.CharactersRepository
@@ -12,16 +13,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val repository: CharactersRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<MarvelCharacter?>(null)
     val state: StateFlow<MarvelCharacter?> = _state
 
-    fun fetch(id: String?) {
+    init {
         viewModelScope.launch {
-            repository.getCharacter(id)
-                .also { _state.value = it }
+            repository.getCharacter(savedStateHandle["characterId"])
+                .also {
+                    _state.value = it
+                }
         }
     }
 }
