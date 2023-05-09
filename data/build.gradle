@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
     id "org.jetbrains.kotlin.kapt"
     id 'org.jetbrains.kotlin.plugin.serialization'
     id 'com.google.dagger.hilt.android'
@@ -28,12 +29,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17
     }
+    namespace 'com.sekthdroid.marvel.data'
 }
 
 dependencies {
@@ -53,7 +55,7 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:_"
     implementation "androidx.room:room-ktx:_"
-    kapt "androidx.room:room-compiler:_"
+    ksp "androidx.room:room-compiler:_"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:_"
