@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [CharacterEntity::class, ResourceEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = true
 )
 internal abstract class MarvelDatabase : RoomDatabase() {
     abstract fun charactersDao(): CharactersDao

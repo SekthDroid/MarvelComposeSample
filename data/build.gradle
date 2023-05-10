@@ -20,6 +20,10 @@ android {
         buildConfigField 'String', "BaseUrl", '"https://gateway.marvel.com:443/v1/public"'
         buildConfigField 'String', "PublicKey", project.properties["marvelPublicKey"]
         buildConfigField 'String', "PrivateKey", project.properties["marvelPrivateKey"]
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
+        }
     }
 
     buildTypes {
