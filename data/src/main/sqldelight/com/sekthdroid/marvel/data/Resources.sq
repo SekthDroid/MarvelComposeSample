@@ -1,0 +1,22 @@
+import com.sekthdroid.marvel.data.sql.ResourceType;
+
+CREATE TABLE IF NOT EXISTS `resources`
+(
+    `characterId` INTEGER NOT NULL,
+    `resourceUri` TEXT NOT NULL,
+    `name` TEXT,
+    `type` TEXT AS ResourceType,
+    PRIMARY KEY(`characterId`, `resourceUri`)
+);
+
+getByCharacter:
+SELECT *
+FROM resources
+WHERE characterId = ?;
+
+insertByCharacter:
+INSERT OR REPLACE INTO resources (characterId, resourceUri, name, type)
+VALUES ?;
+
+deleteFromCharacter:
+DELETE FROM resources WHERE characterId = ?;

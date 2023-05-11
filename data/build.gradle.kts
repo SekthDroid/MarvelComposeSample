@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     kotlin("plugin.serialization")
     id("com.google.dagger.hilt.android")
+    id("app.cash.sqldelight") version "2.0.0-alpha05"
 }
 
 android {
@@ -19,16 +20,15 @@ android {
         buildConfigField("String", "BaseUrl", "\"https://gateway.marvel.com:443/v1/public\"")
         buildConfigField("String", "PublicKey", project.properties["marvelPublicKey"].toString())
         buildConfigField("String", "PrivateKey", project.properties["marvelPrivateKey"].toString())
-
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas".toString())
-        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -39,6 +39,14 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
     namespace = "com.sekthdroid.marvel.data"
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+
+        }
+    }
 }
 
 dependencies {
@@ -55,10 +63,8 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:_")
     implementation("io.ktor:ktor-serialization-kotlinx-json:_")
 
-    // Room
-    implementation("androidx.room:room-runtime:_")
-    implementation("androidx.room:room-ktx:_")
-    ksp("androidx.room:room-compiler:_")
+    // SqlDelight
+    implementation("app.cash.sqldelight:android-driver:_")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:_")

@@ -1,7 +1,7 @@
 package com.sekthdroid.marvel.data
 
 import com.sekthdroid.marvel.data.api.NetworkDatasource
-import com.sekthdroid.marvel.data.room.RoomDatasource
+import com.sekthdroid.marvel.data.sql.LocalDatasource
 import com.sekthdroid.marvel.domain.characters.CharactersRepository
 import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onCompletion
 import javax.inject.Inject
 
 internal class DefaultCharactersRepository @Inject constructor(
-    private val roomDatasource: RoomDatasource,
+    private val roomDatasource: LocalDatasource,
     private val networkDatasource: NetworkDatasource
 ) : CharactersRepository {
 
@@ -32,6 +32,6 @@ internal class DefaultCharactersRepository @Inject constructor(
 
     override suspend fun getCharacter(id: String?): MarvelCharacter? {
         if (id.isNullOrEmpty()) return null
-        return roomDatasource.get(id)
+        return roomDatasource.get(id.toLong())
     }
 }

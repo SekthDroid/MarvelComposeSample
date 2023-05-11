@@ -1,0 +1,23 @@
+-- CharacterEntity
+CREATE TABLE IF NOT EXISTS `characters`
+(
+    `id` INTEGER NOT NULL,
+    `name` TEXT,
+    `thumbnail` TEXT,
+    `description` TEXT,
+    PRIMARY KEY(`id`)
+);
+
+selectAll:
+SELECT *
+FROM characters
+ORDER BY name;
+
+selectById:
+SELECT *
+FROM characters
+WHERE id = ?;
+
+insertFullCharacterObject:
+INSERT OR REPLACE INTO characters (id, name, thumbnail, description)
+VALUES ?;

@@ -1,9 +1,10 @@
 package com.sekthdroid.marvel.data.di
 
 import android.content.Context
-import androidx.room.Room
-import com.sekthdroid.marvel.data.room.CharactersDao
-import com.sekthdroid.marvel.data.room.MarvelDatabase
+import app.cash.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import com.sekthdroid.marvel.data.AppDatabase
+import com.sekthdroid.marvel.data.Resources
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,14 +18,12 @@ internal class DatabaseModule {
 
     @Singleton
     @Provides
-    fun charactersDao(marvelDatabase: MarvelDatabase): CharactersDao {
-        return marvelDatabase.charactersDao()
-    }
-
-    @Singleton
-    @Provides
-    fun room(@ApplicationContext appContext: Context): MarvelDatabase {
-        return Room.databaseBuilder(appContext, MarvelDatabase::class.java, "marvel-characters")
-            .build()
+    fun appDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return AppDatabase.invoke(
+            AndroidSqliteDriver(AppDatabase.Schema, appContext, "app_database.db"),
+            Resources.Adapter(
+                typeAdapter = EnumColumnAdapter()
+            )
+        )
     }
 }
