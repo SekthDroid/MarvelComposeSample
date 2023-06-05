@@ -1,0 +1,6 @@
+framework module shared-domain {
+  umbrella header "placeholder.h"
+
+  export *
+  module * { export * }
+}

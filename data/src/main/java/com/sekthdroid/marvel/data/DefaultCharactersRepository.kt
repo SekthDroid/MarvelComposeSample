@@ -1,16 +1,15 @@
 package com.sekthdroid.marvel.data
 
+import com.sekthdroid.domain.shared.characters.CharactersRepository
+import com.sekthdroid.domain.shared.models.MarvelCharacter
 import com.sekthdroid.marvel.data.api.NetworkDatasource
 import com.sekthdroid.marvel.data.sql.LocalDatasource
-import com.sekthdroid.marvel.domain.characters.CharactersRepository
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
-import javax.inject.Inject
 
-internal class DefaultCharactersRepository @Inject constructor(
+internal class DefaultCharactersRepository (
     private val roomDatasource: LocalDatasource,
     private val networkDatasource: NetworkDatasource
 ) : CharactersRepository {

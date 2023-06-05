@@ -1,0 +1,5 @@
+com.sekthdroid.domain.shared.test.shared-domain-androidTest-0 /Users/sekth/Projects/MarvelCompose/shared-domain/build/generated/res/resValues/androidTest/debug
+com.sekthdroid.domain.shared.test.shared-domain-mergeDebugAndroidTestResources-1 /Users/sekth/Projects/MarvelCompose/shared-domain/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.sekthdroid.domain.shared.test.shared-domain-mergeDebugAndroidTestResources-2 /Users/sekth/Projects/MarvelCompose/shared-domain/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.sekthdroid.domain.shared.test.shared-domain-merged_res-3 /Users/sekth/Projects/MarvelCompose/shared-domain/build/intermediates/merged_res/debugAndroidTest
+com.sekthdroid.domain.shared.test.shared-domain-packaged_res-4 /Users/sekth/Projects/MarvelCompose/shared-domain/build/intermediates/packaged_res/debug

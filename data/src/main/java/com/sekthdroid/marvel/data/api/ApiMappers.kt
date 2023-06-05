@@ -1,13 +1,13 @@
 package com.sekthdroid.marvel.data.api
 
-import com.sekthdroid.marvel.domain.models.ComicList
-import com.sekthdroid.marvel.domain.models.ComicSummary
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
-import com.sekthdroid.marvel.domain.models.Page
-import com.sekthdroid.marvel.domain.models.SeriesList
-import com.sekthdroid.marvel.domain.models.SeriesSummary
-import com.sekthdroid.marvel.domain.models.StoriesList
-import com.sekthdroid.marvel.domain.models.StorySummary
+import com.sekthdroid.domain.shared.models.ComicList
+import com.sekthdroid.domain.shared.models.ComicSummary
+import com.sekthdroid.domain.shared.models.MarvelCharacter
+import com.sekthdroid.domain.shared.models.Page
+import com.sekthdroid.domain.shared.models.SeriesList
+import com.sekthdroid.domain.shared.models.SeriesSummary
+import com.sekthdroid.domain.shared.models.StoriesList
+import com.sekthdroid.domain.shared.models.StorySummary
 
 internal fun <T, O> ResponsePage<T>.toPage(itemMapper: (T) -> O): Page<O> {
     return Page(offset, limit, total, count, results.map(itemMapper))

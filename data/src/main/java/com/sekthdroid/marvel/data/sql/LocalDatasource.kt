@@ -1,19 +1,17 @@
 package com.sekthdroid.marvel.data.sql
 
+import com.sekthdroid.domain.shared.models.ComicList
+import com.sekthdroid.domain.shared.models.ComicSummary
+import com.sekthdroid.domain.shared.models.MarvelCharacter
+import com.sekthdroid.domain.shared.models.SeriesList
+import com.sekthdroid.domain.shared.models.SeriesSummary
+import com.sekthdroid.domain.shared.models.StoriesList
+import com.sekthdroid.domain.shared.models.StorySummary
 import com.sekthdroid.marvel.data.AppDatabase
 import com.sekthdroid.marvel.data.Characters
 import com.sekthdroid.marvel.data.CharactersQueries
 import com.sekthdroid.marvel.data.Resources
 import com.sekthdroid.marvel.data.ResourcesQueries
-import com.sekthdroid.marvel.domain.models.ComicList
-import com.sekthdroid.marvel.domain.models.ComicSummary
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
-import com.sekthdroid.marvel.domain.models.SeriesList
-import com.sekthdroid.marvel.domain.models.SeriesSummary
-import com.sekthdroid.marvel.domain.models.StoriesList
-import com.sekthdroid.marvel.domain.models.StorySummary
-import javax.inject.Inject
-import javax.inject.Singleton
 
 typealias CharactersEntity = Characters
 
@@ -83,8 +81,7 @@ internal fun List<Resources>.toStoriesList(): StoriesList {
         .run { StoriesList(size, this) }
 }
 
-@Singleton
-class LocalDatasource @Inject constructor(private val database: AppDatabase) {
+class LocalDatasource(private val database: AppDatabase) {
     private val resources: ResourcesQueries
         get() = database.resourcesQueries
 

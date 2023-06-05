@@ -55,7 +55,7 @@ import com.sekthdroid.compose.marvel.ui.composables.ImagePlaceholder
 import com.sekthdroid.compose.marvel.ui.providers.FakeCharactersProvider
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
+import com.sekthdroid.domain.shared.models.MarvelCharacter
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview

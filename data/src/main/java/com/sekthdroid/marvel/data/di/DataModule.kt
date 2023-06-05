@@ -1,18 +1,21 @@
 package com.sekthdroid.marvel.data.di
 
+import com.sekthdroid.domain.shared.characters.CharactersRepository
 import com.sekthdroid.marvel.data.DefaultCharactersRepository
-import com.sekthdroid.marvel.domain.characters.CharactersRepository
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import com.sekthdroid.marvel.data.api.NetworkDatasource
+import com.sekthdroid.marvel.data.sql.LocalDatasource
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-internal abstract class DataModule {
+val DataModule = module {
+    factory {
+        LocalDatasource(get())
+    }
 
-    @Singleton
-    @Binds
-    abstract fun bindCharactersRepository(characterRepository: DefaultCharactersRepository): CharactersRepository
+    factory {
+        NetworkDatasource(get(), get())
+    }
+
+    single<CharactersRepository> {
+        DefaultCharactersRepository(get(), get())
+    }
 }

@@ -3,13 +3,13 @@ package com.sekthdroid.compose.marvel.ui.navigation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.sekthdroid.compose.marvel.ui.screens.Screen
 import com.sekthdroid.compose.marvel.ui.screens.character.CharacterScreen
 import com.sekthdroid.compose.marvel.ui.screens.characters.CharactersScreen
 import com.sekthdroid.compose.marvel.ui.screens.composable
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
@@ -20,7 +20,7 @@ fun AppNavigation(navController: NavHostController) {
     ) {
         composable(Screen.CharactersList) {
             CharactersScreen(
-                viewModel = hiltViewModel(),
+                viewModel = koinViewModel(),
                 onCharacterClicked = {
                     navController.navigate(Screen.CharacterDetail.createRoute(it.id))
                 }
@@ -28,7 +28,7 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable(Screen.CharacterDetail) {
             CharacterScreen(
-                viewModel = hiltViewModel(),
+                viewModel = koinViewModel(),
                 onBackPressed = {
                     navController.popBackStack()
                 }

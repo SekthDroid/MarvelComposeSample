@@ -4,11 +4,11 @@ plugins {
     id("com.google.devtools.ksp")
     kotlin("kapt")
     kotlin("plugin.serialization")
-    id("com.google.dagger.hilt.android")
     id("app.cash.sqldelight") version "2.0.0-alpha05"
 }
 
 android {
+    namespace = "com.sekthdroid.marvel.data"
     compileSdk = 33
 
     defaultConfig {
@@ -38,7 +38,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    namespace = "com.sekthdroid.marvel.data"
 }
 
 sqldelight {
@@ -50,7 +49,7 @@ sqldelight {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(":shared-domain"))
 
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:_")
@@ -66,9 +65,9 @@ dependencies {
     // SqlDelight
     implementation("app.cash.sqldelight:android-driver:_")
 
-    // Hilt
-    implementation("com.google.dagger:hilt-android:_")
-    kapt("com.google.dagger:hilt-compiler:_")
+    // Koin
+    implementation("io.insert-koin:koin-core:3.4.1")
+    implementation("io.insert-koin:koin-android:3.4.1")
 
     // Tests
     testImplementation("junit:junit:_")

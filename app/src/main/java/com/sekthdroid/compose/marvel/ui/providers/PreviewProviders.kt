@@ -1,10 +1,10 @@
 package com.sekthdroid.compose.marvel.ui.providers
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.sekthdroid.marvel.domain.models.ComicList
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
-import com.sekthdroid.marvel.domain.models.SeriesList
-import com.sekthdroid.marvel.domain.models.StoriesList
+import com.sekthdroid.domain.shared.models.ComicList
+import com.sekthdroid.domain.shared.models.MarvelCharacter
+import com.sekthdroid.domain.shared.models.SeriesList
+import com.sekthdroid.domain.shared.models.StoriesList
 
 object FakeCharacters {
     val characters = listOf("Spiderman", "Iron Man", "Thanos")

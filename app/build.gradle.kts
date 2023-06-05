@@ -4,10 +4,10 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.application")
     id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
+    namespace = "com.sekthdroid.compose.marvel"
     compileSdk = 33
 
     defaultConfig {
@@ -53,12 +53,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
-    namespace = "com.sekthdroid.compose.marvel"
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(":shared-domain"))
     implementation(project(":data"))
 
     // Android
@@ -84,10 +82,10 @@ dependencies {
     implementation("androidx.paging:paging-runtime:_")
     implementation("androidx.paging:paging-compose:_")
 
-    // Hilt
-    implementation("com.google.dagger:hilt-android:_")
-    kapt("com.google.dagger:hilt-compiler:_")
-    implementation("androidx.hilt:hilt-navigation-compose:_")
+    // Koin
+    implementation("io.insert-koin:koin-core:3.4.1")
+    implementation("io.insert-koin:koin-android:3.4.1")
+    implementation("io.insert-koin:koin-androidx-compose-navigation:3.4.5")
 
     // Test
     testImplementation("junit:junit:_")

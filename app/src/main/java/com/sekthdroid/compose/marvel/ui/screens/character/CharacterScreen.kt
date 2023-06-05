@@ -49,7 +49,7 @@ import com.sekthdroid.compose.marvel.ui.composables.CharacterHeader
 import com.sekthdroid.compose.marvel.ui.providers.SingleCharacterProvider
 import com.sekthdroid.compose.marvel.ui.theme.MarvelFontFamily
 import com.sekthdroid.compose.marvel.ui.theme.MarvelRed
-import com.sekthdroid.marvel.domain.models.MarvelCharacter
+import com.sekthdroid.domain.shared.models.MarvelCharacter
 
 @Composable
 fun CharacterScreen(
